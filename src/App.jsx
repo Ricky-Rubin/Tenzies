@@ -9,7 +9,10 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
 
     for (let i = 0; i < 10; i++) {
       const randomNumber = Math.floor(Math.random() * 6) + 1;
-      numbersArray.push(randomNumber);
+      numbersArray.push({
+        value: randomNumber,
+        isHeld: false
+      });
     }
 
       return(numbersArray);
@@ -21,7 +24,7 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
   }
 
   const assignNumber = dieValue.map((dieNumber) => {
-    return <Die value={dieNumber} />
+    return <Die value={dieNumber.value} />
   })
 
   return (

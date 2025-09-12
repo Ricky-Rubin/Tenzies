@@ -66,4 +66,14 @@ main {
   border: none;
   font-size: 20px;
   font-weight: 600;
+  transition: box-shadow 0.3s ease;
+}
+
+.roll-button:active {
+  transform: translateY(1px);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15); 
+}
+
+.roll-button:hover {
+  box-shadow: 0 0 20px rgba(255, 99, 71, 0.8);
 }
