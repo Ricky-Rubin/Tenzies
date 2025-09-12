@@ -1,5 +1,6 @@
 import React from "react"
 import Die from "/src/Die.jsx"
+import { nanoid } from "nanoid"
 
 export default function App() {
 const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
@@ -11,7 +12,8 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
       const randomNumber = Math.floor(Math.random() * 6) + 1;
       numbersArray.push({
         value: randomNumber,
-        isHeld: false
+        isHeld: false,
+        id: nanoid()
       });
     }
 
@@ -24,7 +26,7 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
   }
 
   const assignNumber = dieValue.map((dieNumber) => {
-    return <Die value={dieNumber.value} />
+    return <Die key={dieNumber.id} value={dieNumber.value} />
   })
 
   return (
