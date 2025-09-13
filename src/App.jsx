@@ -21,8 +21,11 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
   }
 
   function rollDice() {
-    const result = generateDiceNumbers();
-    setDieValue(result);
+    setDieValue(function (prevArray) {
+      return prevArray.map(eachObj => {
+        return eachObj.isHeld === true ? eachObj : {...eachObj, value: Math.ceil(Math.random() * 6)} 
+      })
+    })
   }
 
   function hold(id) {
