@@ -25,8 +25,22 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
     setDieValue(result);
   }
 
+  function hold(id) {
+    setDieValue(function (prevArray) {
+      return prevArray.map(eachdie => {
+        return eachdie.id === id ? {...eachdie, isHeld: !eachdie.isHeld} : eachdie
+      }) 
+    })
+  }
+
   const assignNumber = dieValue.map((dieNumber) => {
-    return <Die key={dieNumber.id} value={dieNumber.value} />
+    return <Die key={dieNumber.id} 
+                value={dieNumber.value} 
+                held={dieNumber.isHeld} 
+                id={function () {
+                  return hold(dieNumber.id)
+                }}
+            />
   })
 
   return (
