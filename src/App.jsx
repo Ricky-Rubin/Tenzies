@@ -64,7 +64,7 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
         {assignNumber}
       </div>
 
-      <button className="roll-button" onClick={rollDice}>Roll Again</button>
+      <button className="roll-button" onClick={rollDice}>{sameNumber && sameBoolean ? "New Game" : "Roll Again"}</button>
     </main>
   )
 }
