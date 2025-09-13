@@ -5,6 +5,13 @@ import { nanoid } from "nanoid"
 export default function App() {
 const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
 
+  const sameNumber = dieValue.every(object => object.value === dieValue[0].value);
+  const sameBoolean = dieValue.every(object => object.isHeld === true)
+
+  if (sameNumber && sameBoolean) {
+    console.log("Game Won!")
+  }
+
   function generateDiceNumbers() {
     const numbersArray = [];
 
@@ -48,6 +55,11 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
 
   return (
     <main>
+      <h1 className="title">Tenzies</h1>
+      <p className="game-instruction">
+        Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
+      </p>
+
       <div className="dice-box-container">
         {assignNumber}
       </div>
