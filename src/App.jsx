@@ -4,7 +4,7 @@ import { nanoid } from "nanoid"
 import Confetti from "react-confetti"
 
 export default function App() {
-const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
+const [dieValue, setDieValue] = React.useState(() => generateDiceNumbers())
 
   const gameWon = dieValue.every(object => object.value === dieValue[0].value) &&
                   dieValue.every(object => object.isHeld === true)
@@ -29,20 +29,8 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
       return(numbersArray);
   }
 
-  // function rollDice() {
-  //   setDieValue(function (prevArray) {
-  //     return prevArray.map(eachObj => {
-  //       return eachObj.isHeld === true ? eachObj : {...eachObj, value: Math.ceil(Math.random() * 6)} 
-  //     })
-  //   })
-  // }
-
   function rollDice() {
-    gameWon ? setDieValue(function (prevArray) {
-      return prevArray.map(eachObj => {
-        return {...eachObj, isHeld: false, value: Math.ceil(Math.random() * 6) }
-      })
-    }) : setDieValue(function (prevArray) {
+    gameWon ? setDieValue(generateDiceNumbers()) : setDieValue(function (prevArray) {
       return prevArray.map(eachObj => {
         return eachObj.isHeld === true ? eachObj : {...eachObj, value: Math.ceil(Math.random() * 6)}
       })
