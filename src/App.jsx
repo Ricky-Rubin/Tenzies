@@ -1,14 +1,16 @@
 import React from "react"
 import Die from "/src/Die.jsx"
 import { nanoid } from "nanoid"
+import Confetti from "react-confetti"
 
 export default function App() {
 const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
 
-  const sameNumber = dieValue.every(object => object.value === dieValue[0].value);
-  const sameBoolean = dieValue.every(object => object.isHeld === true)
+  const gameWon = dieValue.every(object => object.value === dieValue[0].value) &&
+                  dieValue.every(object => object.isHeld === true)
 
-  if (sameNumber && sameBoolean) {
+
+  if (gameWon) {
     console.log("Game Won!")
   }
 
@@ -27,10 +29,22 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
       return(numbersArray);
   }
 
+  // function rollDice() {
+  //   setDieValue(function (prevArray) {
+  //     return prevArray.map(eachObj => {
+  //       return eachObj.isHeld === true ? eachObj : {...eachObj, value: Math.ceil(Math.random() * 6)} 
+  //     })
+  //   })
+  // }
+
   function rollDice() {
-    setDieValue(function (prevArray) {
+    gameWon ? setDieValue(function (prevArray) {
       return prevArray.map(eachObj => {
-        return eachObj.isHeld === true ? eachObj : {...eachObj, value: Math.ceil(Math.random() * 6)} 
+        return {...eachObj, isHeld: false, value: Math.ceil(Math.random() * 6) }
+      })
+    }) : setDieValue(function (prevArray) {
+      return prevArray.map(eachObj => {
+        return eachObj.isHeld === true ? eachObj : {...eachObj, value: Math.ceil(Math.random() * 6)}
       })
     })
   }
@@ -55,6 +69,7 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
 
   return (
     <main>
+      {gameWon && <Confetti />}
       <h1 className="title">Tenzies</h1>
       <p className="game-instruction">
         Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
@@ -64,7 +79,7 @@ const [dieValue, setDieValue] = React.useState(generateDiceNumbers())
         {assignNumber}
       </div>
 
-      <button className="roll-button" onClick={rollDice}>{sameNumber && sameBoolean ? "New Game" : "Roll Again"}</button>
+      <button className="roll-button" onClick={rollDice}>{gameWon ? "New Game" : "Roll Again"}</button>
     </main>
   )
 }
