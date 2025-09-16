@@ -37,4 +37,4 @@ The execution of the project requires implementing all the logic and methods tau
 
 ## Live Website 
 
-- [Tenzies Game App](https://dummy-link.vercel.app/)
+- [Tenzies Game App](https://tenzies-gold.vercel.app/)
