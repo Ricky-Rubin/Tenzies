@@ -104,3 +104,8 @@ main {
   white-space: nowrap;
   border: 0;
 }
+
+.roll-button:focus {
+  outline: 3px solid #ff9000;
+  outline-offset: 4px;
+}

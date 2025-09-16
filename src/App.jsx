@@ -9,10 +9,13 @@ const [dieValue, setDieValue] = React.useState(() => generateDiceNumbers())
   const gameWon = dieValue.every(object => object.value === dieValue[0].value) &&
                   dieValue.every(object => object.isHeld === true)
 
+  const buttonRef = React.useRef(null)
 
-  if (gameWon) {
-    console.log("Game Won!")
-  }
+  React.useEffect(function () {
+    if (gameWon) {
+      buttonRef.current.focus();
+    }
+  }, [gameWon])
 
   function generateDiceNumbers() {
     const numbersArray = [];
@@ -70,7 +73,7 @@ const [dieValue, setDieValue] = React.useState(() => generateDiceNumbers())
         {assignNumber}
       </div>
 
-      <button className="roll-button" onClick={rollDice}>{gameWon ? "New Game" : "Roll Again"}</button>
+      <button className="roll-button" ref={buttonRef} onClick={rollDice}>{gameWon ? "New Game" : "Roll Again"}</button>
     </main>
   )
 }
